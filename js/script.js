@@ -1,16 +1,17 @@
-/* alert("hello"); */
+const numberOfFilms = prompt("Сколько фильмов вы уже посмотрели?", "");
 
-/* const result = confirm("Are you here?"); */
-/* 
-const answer = prompt("Вам есть 18?", "18");
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
+};
 
-console.log(typeof(answer)); */
 
-const answer = [];
+const lastFilm = prompt("Один из просмотренных фильмов?", "");
+const rating = prompt("На сколько оцените его", "");
 
-/* answer[0] = prompt('Как ваше имя?', '');
-answer[1] = prompt('Какая ваша фамилия?', '');
-answer[2] = prompt('Сколько вам лет?', ''); */
+personalMovieDB.movies[lastFilm] = rating;
 
-const namePerson = prompt("Как вас зовут?", "");
-alert(`Добрый день, ${namePerson} !`);
+console.log(personalMovieDB);
