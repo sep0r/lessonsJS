@@ -12,5 +12,5 @@ const answer = [];
 answer[1] = prompt('Какая ваша фамилия?', '');
 answer[2] = prompt('Сколько вам лет?', ''); */
 
-const name = prompt("Как вас зовут?", "");
-alert(`Добрый день, ${name} !`);
+const namePerson = prompt("Как вас зовут?", "");
+alert(`Добрый день, ${namePerson} !`);
