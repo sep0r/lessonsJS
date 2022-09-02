@@ -1,127 +1,72 @@
-let numberOfFilms;
-
-function start() {
-    numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
-
-    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
-    }
-}
-
-start();
-
 const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false
-};
+    privat: false,
+    start: function () {
+        personalMovieDB.count = +prompt("Сколько фильмов вы уже посмотрели?", "");
 
-let lastFilm;
-let rating;
-
-function rememberMyFilms() {
-    for (let i = 0; i < 2; i++) {
-        lastFilm = prompt("Один из просмотренных фильмов?", "");
-        rating = prompt("На сколько оцените его", "");
-
-
-        if ((lastFilm && rating !== null) && ((lastFilm && rating) !== "") && (lastFilm.length < 50 && rating.length < 50)) {
-            personalMovieDB.movies[lastFilm] = rating;
-            console.log(personalMovieDB);
-            console.log("Done");
-        } else {
-            console.log("Error");
-            i--;
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt("Сколько фильмов вы уже посмотрели?", "");
         }
+    },
+
+    rememberMyFilms: function () {
+        for (let i = 0; i < 2; i++) {
+            const lastFilm = prompt("Один из просмотренных фильмов?", "").trim(),
+                rating = prompt("На сколько оцените его", "").trim();
+
+
+            if ((lastFilm && rating !== null) && ((lastFilm && rating) !== "") && (lastFilm.length < 50 && rating.length < 50)) {
+                personalMovieDB.movies[lastFilm] = rating;
+                console.log(personalMovieDB);
+                console.log("Done");
+            } else {
+                console.log("Error");
+                i--;
+            }
+        }
+    },
+
+    detectPersonalLevel: function () {
+        if (personalMovieDB.count < 10) {
+            alert("Просмотренно довольно мало фильмов!");
+        } else if (personalMovieDB.count < 30 && personalMovieDB.count > 10) {
+            alert("Вы классический зритель");
+        } else if (personalMovieDB.count > 30) {
+            alert("Вы киноман!");
+        }
+    },
+
+    showMyDB: function (hidden) {
+        if (!hidden) {
+            console.log(personalMovieDB);
+        }
+    },
+
+    toggleVisibleMyDB: function () {
+        if (personalMovieDB.privat === false) {
+            personalMovieDB.privat = true;
+        } else {
+            personalMovieDB.privat = false;
+        }
+    },
+
+    writeYourGenres: function () {
+        for (let i = 0; i < 3; i++) {
+
+            let genre = prompt(`Ваш любимый жанр под номером ${i+1}`, '').trim();
+
+            if (genre == null || genre == "") {
+                i--;
+            }
+
+            personalMovieDB.genres[i] = genre;
+        }
+
+        personalMovieDB.genres.forEach(function (item, i) {
+            console.log(`Любимый жанр ${i+1} - это ${item}`);
+        });
     }
-}
-
-rememberMyFilms();
-
-function detectPersonalLevel() {
-    if (personalMovieDB.count < 10) {
-        alert("Просмотренно довольно мало фильмов!");
-    } else if (personalMovieDB.count < 30 && personalMovieDB.count > 10) {
-        alert("Вы классический зритель");
-    } else if (personalMovieDB.count > 30) {
-        alert("Вы киноман!");
-    }
-}
-
-detectPersonalLevel();
-
-function showMyDB(privat) {
-    if (!privat) {
-        console.log(personalMovieDB);
-    }
-}
-
-showMyDB(personalMovieDB.privat);
-
-function writeYourGenres() {
-    for (let i = 0; i < 3; i++) {
-        personalMovieDB.genres[i] = prompt(`Ваш любимый жанр под номером ${i+1}`, '');
-    }
-}
-
-writeYourGenres();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+};
